@@ -1,1 +1,2 @@
-- 👋 Hi, I’m @sotiulian
+- 👋 Hi, I’m @sotiulian a guy from Romania which likes to made programms. I'm actualy have expertise in Android Studio Java programms, PHP API and SQL Server database & administration and stored procedures.
+My work covers all the programming fields: database, API's, interfaces. Last decade I developed and started complex systems that works in textile production plants together with IoT devices. They try to get informations from all the machines & operators that works and broadcast the results to chiefs and back to operators by android tablets.
