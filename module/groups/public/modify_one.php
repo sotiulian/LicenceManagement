@@ -37,13 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group">
                 <label for="isadmin">Is Admin:</label>
-                <input type="hidden" class="form-control" id="isadmin" name="isadmin" value="0">
-                <input type="checkbox" class="form-control" id="isadmin" name="isadmin" <?php echo $tableobject->isadmin ? 'checked': '' ?> value="<?php echo $tableobject->isadmin; ?>">
+                <select id="isadmin" name="isadmin" class="form-control">
+                    <option value="0" <?php echo ($tableobject->isadmin == 0 ? 'selected' : '') ?>>Not Admin</option>
+                    <option value="1" <?php echo ($tableobject->isadmin == 1 ? 'selected' : '') ?>>Admin</option>
+                </select>    
             </div>
             <div class="form-group">
-                <label for="issysadmin">Is SysAdmin:</label>
-                <input type="hidden" class="form-control" id="issysadmin" name="issysadmin" value="0"> 
-                <input type="checkbox" class="form-control" id="issysadmin" name="issysadmin" <?php echo $tableobject->issysadmin ? 'checked': '' ?> value="<?php echo $tableobject->issysadmin; ?>">
+                <label for="issysadmin">Sys Admin</label>
+                <select id="issysadmin" name="issysadmin" class="form-control">
+                    <option value="0" <?php echo ($tableobject->issysadmin == 0 ? 'selected' : '') ?>>Not SysAdmin</option>
+                    <option value="1" <?php echo ($tableobject->issysadmin == 1 ? 'selected' : '') ?>>SysAdmin</option>
+                </select>  
             </div>
             <button type="submit" name="delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
             <button type="submit" name="save" class="btn btn-primary">Update</button>
