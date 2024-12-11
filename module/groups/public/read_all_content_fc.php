@@ -9,15 +9,15 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6 d-flex flex-row">
+                    <div class="form-group col-md-6">
                         <label for="isadmin">Admin</label>
-                        <select id="isadmin" name="isadmin" class="form-control">
+                        <select id="isadmin" name="isadmin" class="form-control" >
                             <option value="0" <?php echo ($isadmin == 0 ? 'selected' : '') ?>>Not Admin</option>
                             <option value="1" <?php echo ($isadmin == 1 ? 'selected' : '') ?>>Admin</option>
                             <option value="2" <?php echo ($isadmin == 2 ? 'selected' : '') ?>>Admin and Not Admin</option>
                         </select>    
                     </div>
-                    <div class="form-group col-md-6 d-flex flex-row">
+                    <div class="form-group col-md-6">
                         <label for="issysadmin">Sys Admin</label>
                         <select id="issysadmin" name="issysadmin" class="form-control">
                             <option value="0" <?php echo ($issysadmin == 0 ? 'selected' : '') ?>>Not SysAdmin</option>
