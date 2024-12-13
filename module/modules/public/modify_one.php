@@ -1,36 +1,37 @@
-<?php
+issys<?php
 include '../config/db_connect.php';
 
-include '../src/User.php';
-include '../src/UsersGroups.php';
+include '../src/Modul.php';
+include '../src/ModulesGroups.php';
 
-$user = new User($conn);
-$usersgroups = new UsersGroups($conn);
+$parent = new Modul($conn);
+$parentchild = new ModulesGroups($conn);
 
 /* cand se vine din click pe linie de tabel de modificat */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST['formname']) && $_POST['formname'] === 'read_all_child_content') {
         /* daca modify_one a fost chemat prin click de pe formularul modifyusergroup din read_all_child_content, se salveaza alegerea */
-        $user->keyid = $_POST['keyid_users']; // pastreaza $user->keyid pentru read_single()
-        $usersgroups->keyid_users = $_POST['keyid_users'];
-        $usersgroups->keyid_groups = $_POST['keyid_groups'];
-        $stmt_child = $usersgroups->set_usersgroups();
+        $parent->keyid = $_POST['keyid_parent']; // pastreaza $parent->keyid pentru read_single()
+        $parentchild->keyid_parent = $_POST['keyid_parent'];
+        $parentchild->keyid_child = $_POST['keyid_child'];
+        $stmt_child = $parentchild->set_parentchild();
     } else {
-        /* initializez cu cheia de user cu care s-a intrat in fereastra din read_all */
-        $user->keyid = $_POST['keyid']; // pastreaza $user->keyid pentru read_single()
-        $usersgroups->keyid_users = $_POST['keyid'];
-        // de keyid_groups nu este nevoie pentru ca se va seta pe forma read_all_child_content
+        /* initializez cu cheia de parent cu care s-a intrat in fereastra din read_all */
+        $parent->keyid = $_POST['keyid']; // pastreaza $parent->keyid pentru read_single()
+        $parentchild->keyid_parent = $_POST['keyid'];
+        // de keyid_child nu este nevoie pentru ca se va seta pe forma read_all_child_content
     }
 
     /* citeste din baza de date care sunt legaturile deja existente intre users si groups si le incarca in $stmt_child de unde vor fi luate de forma read_all_child_content */
-    $stmt_child = $usersgroups->read_usergroups(); // fetch este in while-ul din read_all_child_content.php
+    $stmt_child = $parentchild->read_parentchild(); // fetch este in while-ul din read_all_child_content.php
 
     /* scrie forma de modify_one */
-    $stmt = $user->read_single();
+    $stmt = $parent->read_single();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $user->username = $row['username'];
-    $user->timestampend = $row['timestampend'];
+    $parent->nume = $row['nume'];
+    $parent->modul = $row['modul'];
+    $parent->issys = $row['issys'];
 
 }
 ?>
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Modify User</title>
+    <title>Modify Module</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -48,28 +49,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <div class="row">
         <div class="col-6">
-        <h2>Modify User</h2>
+        <h2>Modify Module</h2>
         <form method="post" action="modify_handlerform.php"  onsubmit="return validateForm(event)">
             <input type="hidden" name="formname" value="modifyuserdata">
-            <input type="hidden" id="keyid" name="keyid" value="<?php echo $user->keyid; ?>">
+            <input type="hidden" id="keyid" name="keyid" value="<?php echo $parent->keyid; ?>">
             <div class="form-group">
-                <label for="username">username:</label>
-                <input type="text" class="form-control" id="username" name="username" value="<?php echo $user->username; ?>">
+                <label for="nume">Nume:</label>
+                <input type="text" class="form-control" id="nume" name="nume" value="<?php echo $parent->nume; ?>">
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <label for="modul">Modul:</label>
+                <input type="text" class="form-control" id="modul" name="modul" value="<?php echo $parent->modul; ?>">
             </div>
             <div class="form-group">
-                <label for="timestampend">Date of Birth:</label>
-                <input type="datetime-local" class="form-control" id="timestampend" name="timestampend" value="<?php echo date('Y-m-d\TH:i', strtotime($user->timestampend)); ?>">
+                <label for="issys">Sys Module</label>
+                <select id="issys" name="issys" class="form-control">
+                    <option value="0" <?php echo ($parent->issys == 0 ? 'selected' : '') ?>>Not Sys Module</option>
+                    <option value="1" <?php echo ($parent->issys == 1 ? 'selected' : '') ?>>Sys Module</option>
+                </select>  
             </div>
-            <button type="submit" name="delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+            <button type="submit" name="delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this parent?');">Delete</button>
             <button type="submit" name="save" class="btn btn-primary">Update</button>
         </form>       
         </div>
         <div class="col-6">
-            <h2>Associate User with Groups</h2>
+            <h2>Associate Modul with Groups</h2>
             <?php include 'read_all_child_content.php'; ?>
         </div>
         </div>
@@ -78,26 +82,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         function validateForm() {
 
             let keyid = document.getElementById("keyid").value.trim();
-            let username = document.getElementById("username").value.trim();
-            let password = document.getElementById("password").value.trim();
-            let timestampend = document.getElementById("timestampend").value.trim();
+            let nume = document.getElementById("nume").value.trim();
+            let modul = document.getElementById("modul").value.trim();
+            let issys = document.getElementById("issys").value;
             let errors = [];
 
-            if (username === "") {
-                errors.push("username is required.");
+            if (nume === "") {
+                errors.push("Nume is required.");
             }
 
+            if (modul === "") {
+                errors.push("Modul is required.");
+            } 
+            
             if (event.submitter && event.submitter.name === 'save') {
-                if (password === "") {
-                    errors.push("Password is required.");
-                } else if (password.length < 6) {
-                    errors.push("Password must be at least 6 characters long.");
-                }
-            }    
 
-            if (timestampend === "") {
-                errors.push("Timestamp end is required.");
-            }
+            }   
 
             if (errors.length > 0) {
                 alert(errors.join("\n"));

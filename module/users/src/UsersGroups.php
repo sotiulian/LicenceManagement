@@ -61,6 +61,9 @@ class UsersGroups {
         return $stmt;
     }
 
+    /* trebuie sa existe stored procedure: manage_users_groups */
+    /* creeaza combinatia users-groups in tabelul one-to-many daca nu exista inca si o sterge daca exista */
+    /* functionalitatea aceasta este necesara la click pe forma din interfata in casuta isassociated */
     public function set_usersgroups() {
         $query = ' CALL manage_users_groups(:keyid_groups, :keyid_users); ';
 
@@ -103,7 +106,7 @@ class UsersGroups {
     public function filter_users($keyid_groups, $keyid_users, $start, $limit) {
         $query = 'SELECT keyid, keyid_groups, keyid_users FROM ' 
                 . $this->table 
-                . ' WHERE keyid_groups LIKE :keyid_groups AND keyid_users LIKE :keyid_users LIMIT :start, :limit';
+                . ' WHERE keyid_groups =:keyid_groups AND keyid_users = :keyid_users LIMIT :start, :limit';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':keyid_groups', $keyid_groups, PDO::PARAM_STR);
         $stmt->bindParam(':keyid_users', $keyid_users, PDO::PARAM_STR);
@@ -114,7 +117,7 @@ class UsersGroups {
     }
 
     public function count_filtered($keyid_groups, $keyid_users) {
-        $query = 'SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE keyid_groups LIKE :keyid_groups AND keyid_users LIKE :keyid_users';
+        $query = 'SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE keyid_groups = :keyid_groups AND keyid_users = :keyid_users';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':keyid_groups', $keyid_groups, PDO::PARAM_STR);
         $stmt->bindParam(':keyid_users', $keyid_users, PDO::PARAM_STR);

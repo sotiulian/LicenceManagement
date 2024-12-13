@@ -12,11 +12,12 @@ session_start();
 <body>
     <!-- Menu --> 
     <?php include '../config/navbar.php'; ?>
+
     <div class="container-fluid">
         <!-- First Row -->
         <div class="row">
             <div class="col-10">
-                <h1>Users list</h1>
+                <h1>Modules list</h1>
             </div>
             <div class="col-2 d-flex align-items-end">
                 <img src="../img/program_logo.png" alt="Logo" class="img-fluid">
@@ -32,7 +33,7 @@ session_start();
                 <?php include($content); ?>
             </div>
             <div class="col-2 d-flex flex-column">
-                <button class="btn btn-info mb-2" onclick="window.location.href='create_one.php'">Create user</button>
+                <button class="btn btn-info mb-2" onclick="window.location.href='create_one.php'">Create module</button>
             </div>            
         </div>
         <!-- Fourth Row -->

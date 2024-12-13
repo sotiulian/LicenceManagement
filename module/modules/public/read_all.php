@@ -1,22 +1,38 @@
 <?php
 
 include '../config/db_connect.php';
-include '../src/User.php';
+include '../src/Modul.php';
 
-$user = new User($conn);
+$module = new Modul($conn);
 
 $limit = 15;
-$page = isset($_POST['page']) ? $_POST['page'] : 1;
-$start = ($page - 1) * $limit;
+$page = 1;
+$start = 0;
 
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$timestampend_start = isset($_POST['timestampend_start']) ? $_POST['timestampend_start'] : date('1000-m-01');
-$timestampend_end = isset($_POST['timestampend_end']) ? $_POST['timestampend_end'] : date('2999-m-d'); # vezi si metoda reset_form() din _content
+$nume = '';
+$modul = ''; 
+$issys = 2; // 2 means both cases: unchecked and checked
 
-$total_users = $user->count_filtered($username, $timestampend_start, $timestampend_end);
-$total_pages = ceil($total_users / $limit);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-$stmt = $user->filter_users($username, $timestampend_start, $timestampend_end, $start, $limit);
+    $page = isset($_POST['page']) ? $_POST['page'] : 1;
+    $start = ($page - 1) * $limit;
+
+    $nume = isset($_POST['nume']) ? $_POST['nume'] : '';
+    $modul = isset($_POST['modul']) ? $_POST['modul'] : '';
+    $issys = $_POST['issys'];
+}
+
+/*
+echo $nume;
+echo $modul;
+echo $issys;
+*/
+
+$total_rows = $module->count_filtered($nume, $modul, $issys);
+$total_pages = ceil($total_rows / $limit);
+
+$stmt = $module->filter_table($nume, $modul, $issys, $start, $limit);
 
 // Calculate the number of records
 $row_count = 0;

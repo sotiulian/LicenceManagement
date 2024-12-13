@@ -10,7 +10,7 @@
         <a class="nav-link" href="create_one.php">Create Module</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="read_all.php">View Module</a>
+        <a class="nav-link" href="read_all.php">View Modules</a>
       </li>
     </ul>
   </div>

@@ -12,6 +12,9 @@
       <li class="nav-item">
         <a class="nav-link" href="module/groups/public/index.php">Groups</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="module/modules/public/index.php">Modules</a>
+      </li>      
     </ul>
   </div>
 </nav>

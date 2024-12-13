@@ -1,9 +1,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>keyid</th>
-            <th>Username</th>
-            <th>Timestamp end</th>
+            <th>Nume</th>
+            <th>Module</th>
+            <th>Is Sys module</th>
         </tr>
     </thead>
     <tbody>
@@ -13,9 +13,9 @@
             echo '<tr onclick="document.getElementById(\'form-' . $row['keyid'] . '\').submit();">';
             echo '<form id="form-' . $row['keyid'] . '" method="POST" action="modify_one.php">';
             echo '<input type="hidden" name="keyid" value="' . $row['keyid'] . '">';
-            echo '<td>' . $row['keyid'] . '</td>';
-            echo '<td>' . $row['username'] . '</td>';
-            echo '<td>' . $row['timestampend'] . '</td>';
+            echo '<td>' . $row['nume'] . '</td>';
+            echo '<td>' . $row['modul'] . '</td>';
+            echo '<td><input type="checkbox" class="form-control" ' . ($row['issys'] ? 'checked' : '') . ' disabled></td>';
             echo '</form>';
             echo '</tr>';
         }
@@ -45,9 +45,9 @@
     }
 
     function resetForm() {
-        document.getElementById("username").value = "";
-        document.getElementById("timestampend_start").value = "<?php echo date('1000-m-01'); ?>";
-        document.getElementById("timestampend_end").value = "<?php echo date('2999-m-d'); ?>";
+        document.getElementById("nume").value = "";
+        document.getElementById("modul").value = "";
+        document.getElementById("issys").value = 2;
         
         document.getElementById("filterForm").submit();
     }

@@ -11,11 +11,11 @@
         <?php
         while ($row = $stmt_child->fetch(PDO::FETCH_ASSOC)) {
 
-            echo '<tr onclick="document.getElementById(\'form-' . $row['keyid_groups'] . '\').submit();">';
-            echo '<form id="form-' . $row['keyid_groups'] . '" method="POST" action="modify_one.php">';
+            echo '<tr onclick="document.getElementById(\'form-' . $row['keyid_child'] . '\').submit();">';
+            echo '<form id="form-' . $row['keyid_child'] . '" method="POST" action="modify_one.php">';
             echo '<input type="hidden" name="formname" value="read_all_child_content">';
-            echo '<input type="hidden" name="keyid_groups" value="' . $row['keyid_groups'] . '">';
-            echo '<input type="hidden" name="keyid_users" value="' . $row['keyid_users'] . '">';
+            echo '<input type="hidden" name="keyid_child" value="' . $row['keyid_child'] . '">';
+            echo '<input type="hidden" name="keyid_parent" value="' . $row['keyid_parent'] . '">';
             echo '<td>' . '<input type="checkbox" class="form-control" ' .($row['isassociated'] ? 'checked' : '') . '>' . '</td>';
             echo '<td>' . $row['nume'] . '</td>';
             echo '<td>' . '<input type="checkbox" class="form-control" ' .($row['isadmin'] ? 'checked' : '') . ' disabled>' . '</td>';

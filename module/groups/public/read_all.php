@@ -6,12 +6,12 @@ include '../src/Group.php';
 $tableobject = new Group($conn);
 
 $limit = 15;
-$page =1;
+$page = 1;
 $start = 0;
 
 $nume = '';
-$isadmin = 2;
-$issysadmin = 2;
+$isadmin = 2; // 2 means both cases: unchecked and checked
+$issysadmin = 2; // 2 means both cases: unchecked and checked
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -35,7 +35,7 @@ $total_pages = ceil($total_rows / $limit);
 
 $stmt = $tableobject->filter_table($nume, $isadmin, $issysadmin, $start, $limit);
 
-// Calculate the sum of networth
+// Calculate how many records are set with admin and sysadmin rights
 $admin_sum = 0;
 $sysadmin_sum = 0;
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

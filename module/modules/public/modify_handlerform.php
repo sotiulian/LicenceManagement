@@ -1,9 +1,9 @@
 <?php
 
 include '../config/db_connect.php';
-include '../src/User.php';
+include '../src/Modul.php';
 
-$user = new User($conn);
+$parent = new Modul($conn);
 
 /* cand se vine din butonul submit de pe forma de modificare */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,23 +11,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['delete'])) {
         
         // Handle DELETE logic 
-        $user->keyid = $_POST['keyid'];
-        if ($user->delete()) {
+        $parent->keyid = $_POST['keyid'];
+        if ($parent->delete()) {
             header("Location: read_all.php");
             exit();
         } else {
-            $_SESSION['message']= "Failed to delete user.";
+            $_SESSION['message']= "Failed to delete record.";
         }
 
     } else {
         
         // Handle SAVE logic
-        $user->keyid = $_POST['keyid'];
-        $user->username = $_POST['username'];
-        $user->password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $user->timestampend = $_POST['timestampend'];
-    
-        if ($user->update()) {
+        $parent->keyid = $_POST['keyid'];
+        $parent->nume = $_POST['nume'];
+        $parent->modul = $_POST['modul'];
+        $parent->issys = $_POST['issys'];
+
+        if ($parent->update()) {
+            
             header("Location: read_all.php");
             exit();            
             $_SESSION['message'] = "Record updated successfully";

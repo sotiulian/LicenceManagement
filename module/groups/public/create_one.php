@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $issysadmin = $_POST['issysadmin'];
 
     if (empty($nume)) {
-        $errors[] = "Name is required.";
+        $errors[] = "Nume is required.";
     }
 
     if (empty($errors)) {

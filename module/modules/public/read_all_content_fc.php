@@ -4,19 +4,24 @@
             <div class="col-md-10">
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="username">User name</label>
-                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" value="<?php echo $username; ?>">
+                        <label for="nume">Nume</label>
+                        <input type="text" id="nume" name="nume" class="form-control" placeholder="Nume" value="<?php echo $nume; ?>">
                     </div>
                 </div>
-
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="timestampend_start">Timestamp end from</label>
-                        <input type="date" id="timestampend_start" name="timestampend_start" class="form-control" value="<?php echo $timestampend_start; ?>">
+                    <div class="form-group col-md-12">
+                        <label for="modul">Modul</label>
+                        <input type="text" id="modul" name="modul" class="form-control" placeholder="Modul" value="<?php echo $modul; ?>">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="timestampend_end">to</label>
-                        <input type="date" id="timestampend_end" name="timestampend_end" class="form-control" value="<?php echo $timestampend_end; ?>">
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                        <label for="issys">Sys Module</label>
+                        <select id="issys" name="issys" class="form-control">
+                            <option value="0" <?php echo ($issys == 0 ? 'selected' : '') ?>>Not Sys Module</option>
+                            <option value="1" <?php echo ($issys == 1 ? 'selected' : '') ?>>Sys Module</option>
+                            <option value="2" <?php echo ($issys == 2 ? 'selected' : '') ?>>SysModule and Not SysModule</option>
+                        </select>    
                     </div>
                 </div>
             </div>

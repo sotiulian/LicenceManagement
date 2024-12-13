@@ -1,16 +1,43 @@
 <?php
 include '../config/db_connect.php';
-include '../src/User.php';
+include '../src/Modul.php';
 
-$user = new User($conn);
+$user = new Modul($conn);
 
 $errors = [];
-$username = '';
-$email = '';
-$timestampend = '';
-$networth = '';
-$password = '';
+$nume = '';
+$modul = '';
+$issys = 0;
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $nume = trim($_POST['nume']);
+    $modul = $_POST['modul'];
+    $issys = $_POST['issys'];
+
+    if (empty($nume)) {
+        $errors[] = "Nume is required.";
+    }
+
+    if (empty($errors)) {
+
+        $modul = new Modul($conn);
+        
+        $modul->nume = $nume;
+        $modul->modul = $modul;
+        $modul->issys = $issys;
+
+
+        if ($group->create()) {
+            header("Location: create_one.php");
+            exit();
+        } else {
+            $errors[] = "Failed to create group.";
+        }
+    } else {
+        $error_message = implode("\\n", $errors);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,43 +53,38 @@ $password = '';
     <?php include '../config/navbar.php'; ?>
 
     <div class="container">
-        <h2>Create User</h2>
+        <h2>Create Module</h2>
         <form method="POST" action="create_handleform.php" onsubmit="return validateForm()">
             <div class="form-group">
-                <label for="username">username</label>
-                <input type="text" id="username" name="username" class="form-control" value="<?php echo htmlspecialchars($username); ?>">
+                <label for="nume">Nume</label>
+                <input type="text" id="nume" name="nume" class="form-control" value="<?php echo htmlspecialchars($nume); ?>">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control">
+                <label for="modul">Modul</label>
+                <input type="text" id="modul" name="modul" class="form-control">
             </div>
             <div class="form-group">
-                <label for="timestampend">Timestamp end</label>
-                <input type="date" id="timestampend" name="timestampend" class="form-control" value="<?php echo htmlspecialchars($timestampend); ?>">
+                <label for="issys">Is Sys Module</label>
+                <input type="hidden" name="issys" value="0">
+                <input type="checkbox" id="issys" name="issys" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
     <script>
         function validateForm() {
-            let username = document.getElementById("username").value.trim();
-            let password = document.getElementById("password").value.trim();
-            let timestampend = document.getElementById("timestampend").value.trim();
+            let nume = document.getElementById("nume").value.trim();
+            let modul = document.getElementById("modul").value.trim();
+
             let errors = [];
 
-            if (username === "") {
-                errors.push("username is required.");
+            if (nume === "") {
+                errors.push("Nume is required.");
             }
 
-            if (password === "") {
-                errors.push("Password is required.");
-            } else if (password.length < 6) {
-                errors.push("Password must be at least 6 characters long.");
-            }
-
-            if (timestampend === "") {
-                errors.push("Timestamp end is required.");
-            }
+            if (modul === "") {
+                errors.push("Modul is required.");
+            } 
 
             if (errors.length > 0) {
                 alert(errors.join("\n"));
