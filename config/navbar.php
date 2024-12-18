@@ -15,6 +15,15 @@
       <li class="nav-item">
         <a class="nav-link" href="module/modules/public/index.php">Modules</a>
       </li>      
+      <li class="nav-item">
+        <a class="nav-link" href="module/programs/public/index.php">Programs</a>
+      </li>      
+      <li class="nav-item">
+        <a class="nav-link" href="module/versiuni/public/index.php">Versions</a>
+      </li>     
+      <li class="nav-item">
+        <a class="nav-link" href="module/furnizori/public/index.php">Furnizori</a>
+      </li>                        
     </ul>
   </div>
 </nav>

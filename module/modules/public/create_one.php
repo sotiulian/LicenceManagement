@@ -2,7 +2,7 @@
 include '../config/db_connect.php';
 include '../src/Modul.php';
 
-$user = new Modul($conn);
+$modul = new Modul($conn);
 
 $errors = [];
 $nume = '';
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: create_one.php");
             exit();
         } else {
-            $errors[] = "Failed to create group.";
+            $errors[] = "Failed to create record.";
         }
     } else {
         $error_message = implode("\\n", $errors);
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta username="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create User</title>
+    <title>Create Module</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -78,13 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             let errors = [];
 
-            if (nume === "") {
-                errors.push("Nume is required.");
-            }
-
-            if (modul === "") {
-                errors.push("Modul is required.");
-            } 
+            if (nume === "") {errors.push("Nume is required.");}
+            if (modul === "") {errors.push("Modul is required.");} 
 
             if (errors.length > 0) {
                 alert(errors.join("\n"));

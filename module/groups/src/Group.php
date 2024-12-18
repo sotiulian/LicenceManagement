@@ -29,8 +29,11 @@ class Group {
     }
 
     public function delete() {
-        $query = 'DELETE FROM ' . $this->table . ' WHERE keyid = :keyid';
+        //$query = 'DELETE FROM ' . $this->table . ' WHERE keyid = :keyid';
+        $query = 'CALL delete_parent_and_child_dynamic(:parenttable, :keyid,  @result);'
+        . 'SELECT @result;';
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':parenttable', $this->table, PDO::PARAM_STR);
         $stmt->bindParam(':keyid', $this->keyid, PDO::PARAM_INT);
         return $stmt->execute();
     }

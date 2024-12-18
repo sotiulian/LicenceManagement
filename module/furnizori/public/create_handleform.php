@@ -1,44 +1,29 @@
 <?php
 
 include '../config/db_connect.php';
-include '../src/User.php';
+include '../src/Furnizor.php';
 
-$user = new User($conn);
+$parent = new Furnizor($conn);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $username = trim($_POST['username']);
-    $timestampend = trim($_POST['timestampend']);
-    $password = trim($_POST['password']);
+    $nume = trim($_POST['nume']);
 
-    if (empty($username)) {
-        $errors[] = "username is required.";
-    }
-
-    if (empty($password)) {
-        $errors[] = "Password is required.";
-    } elseif (strlen($password) < 6) {
-        $errors[] = "Password must be at least 6 characters long.";
-    }
-
-    if (empty($timestampend)) {
-        $errors[] = "Date of Birth is required.";
-    }
+    if (empty($nume)) {$errors[] = "nume is required.";}
 
     if (empty($errors)) {
-        #$user = new User($conn);
-        $user->username = $username;
-        $user->timestampend = $timestampend;
-        $user->password = password_hash($password, PASSWORD_DEFAULT);
+        
+        $parent->nume = $nume;
 
-        if ($user->create()) {
-            header("Location: create_one.php");
-            exit();
-        } else {
-            $errors[] = "Failed to create user.";
-        }
+        if (! $parent->create()) {$errors[] = "Failed to create record.";}
+
     } else {
         $error_message = implode("\\n", $errors);
     }
+
 }
+
+header("Location: create_one.php");
+exit();
+
 ?>

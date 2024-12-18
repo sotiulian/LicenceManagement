@@ -16,7 +16,7 @@ session_start();
         <!-- First Row -->
         <div class="row">
             <div class="col-10">
-                <h1>Users list</h1>
+                <h1>List</h1>
             </div>
             <div class="col-2 d-flex align-items-end">
                 <img src="../img/program_logo.png" alt="Logo" class="img-fluid">

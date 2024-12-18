@@ -7,10 +7,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="create_one.php">Create User</a>
+        <a class="nav-link" href="create_one.php">Create Furnizor</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="read_all.php">View Users</a>
+        <a class="nav-link" href="read_all.php">View Furnizori</a>
       </li>
     </ul>
   </div>

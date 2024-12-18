@@ -1,4 +1,4 @@
-issys<?php
+<?php
 include '../config/db_connect.php';
 
 include '../src/Versiune.php';

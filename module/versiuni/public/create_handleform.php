@@ -23,12 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tableobject->filename = $filename;
         $tableobject->keyid_programe = $keyid_child;
 
-        if ($tableobject->create()) {
-            //header("Location: create_one.php");
-            //exit();
-        } else {
-            $errors[] = "Failed to create record.";
-        }
+        if (!$tableobject->create()) {$errors[] = "Failed to create record."; }
+        
     } else {
         $error_message = implode("\\n", $errors);
     }

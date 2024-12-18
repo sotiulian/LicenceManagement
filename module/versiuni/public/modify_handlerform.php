@@ -36,18 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!empty($errors)) {
             $error_message = implode("\\n", $errors);
             $_SESSION['message'] = $error_message;
-            echo '<script type="text/javascript">'; 
-            echo 'alert("' . $error_message . '");'; 
-            echo '</script>';
-
+            echo '<script type="text/javascript">'
+                . 'alert("' . $error_message . '");'
+                . '</script>';
+            /* creeaza o forma intr-un tabel ca sa poata sa dea submit automat si astfel sa reincarce modify_one furnizandu-i prin POST pe keyid */
             echo '<tbody>'
                  .'<tr onclick="document.getElementById(\'form-repeat\').submit();">'
                  .'<form id="form-repeat" method="POST" action="modify_one.php">'
                  .'<input type="hidden" name="keyid" value="' . $parent->keyid . '">'
                  .'</form>'
                  .'</tr>'
-                 .'</tbody>';
-            echo '<script type="text/javascript"> document.getElementById("form-repeat").submit(); </script>';
+                 .'</tbody>'
+                . '<script type="text/javascript"> document.getElementById("form-repeat").submit(); </script>';
             exit();              
         } else
         if ($parent->update()) {          

@@ -1,9 +1,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>keyid</th>
-            <th>Username</th>
-            <th>Timestamp end</th>
+            <th>Furnizori</th>
         </tr>
     </thead>
     <tbody>
@@ -13,9 +11,7 @@
             echo '<tr onclick="document.getElementById(\'form-' . $row['keyid'] . '\').submit();">';
             echo '<form id="form-' . $row['keyid'] . '" method="POST" action="modify_one.php">';
             echo '<input type="hidden" name="keyid" value="' . $row['keyid'] . '">';
-            echo '<td>' . $row['keyid'] . '</td>';
-            echo '<td>' . $row['username'] . '</td>';
-            echo '<td>' . $row['timestampend'] . '</td>';
+            echo '<td>' . $row['nume'] . '</td>';
             echo '</form>';
             echo '</tr>';
         }
@@ -33,6 +29,7 @@
 </nav>
 
 <script>
+    // called by the page navigation buttons
     function submitPage(page) {
         const form = document.getElementById('filterForm');
         const input = document.createElement('input');
@@ -43,12 +40,9 @@
         form.appendChild(input);
         form.submit();
     }
-
-    function resetForm() {
-        document.getElementById("username").value = "";
-        document.getElementById("timestampend_start").value = "<?php echo date('1000-m-01'); ?>";
-        document.getElementById("timestampend_end").value = "<?php echo date('2999-m-d'); ?>";
-        
+    // called by the reset button from the filter form
+    function resetForm() {      
+        document.getElementById("nume").value = "";
         document.getElementById("filterForm").submit();
     }
 </script>

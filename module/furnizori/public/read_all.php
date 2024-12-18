@@ -1,22 +1,20 @@
 <?php
 
 include '../config/db_connect.php';
-include '../src/User.php';
+include '../src/Furnizor.php';
 
-$user = new User($conn);
+$tableobject = new Furnizor($conn);
 
 $limit = 15;
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
 $start = ($page - 1) * $limit;
 
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$timestampend_start = isset($_POST['timestampend_start']) ? $_POST['timestampend_start'] : date('1000-m-01');
-$timestampend_end = isset($_POST['timestampend_end']) ? $_POST['timestampend_end'] : date('2999-m-d'); # vezi si metoda reset_form() din _content
+$nume = isset($_POST['nume']) ? $_POST['nume'] : '';
 
-$total_users = $user->count_filtered($username, $timestampend_start, $timestampend_end);
-$total_pages = ceil($total_users / $limit);
+$total_records = $tableobject->count_filtered($nume);
+$total_pages = ceil($total_records / $limit);
 
-$stmt = $user->filter_users($username, $timestampend_start, $timestampend_end, $start, $limit);
+$stmt = $tableobject->filter_users($nume, $start, $limit);
 
 // Calculate the number of records
 $row_count = 0;
