@@ -8,7 +8,7 @@
 <body>
     <?php include '../config/navbar.php'; ?>
     <div class="container">
-        <h1>Furnizori management module</h1>
+        <h1>Clienti management module</h1>
         <!-- <p>Users management.</p> -->
     </div>
 </body>

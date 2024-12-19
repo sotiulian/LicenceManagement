@@ -1,9 +1,9 @@
 <?php
 
 
-class Furnizor {
+class Client {
     private $conn;
-    private $table = 'furnizori';
+    private $table = 'clienti';
 
     public $keyid;
     public $nume;

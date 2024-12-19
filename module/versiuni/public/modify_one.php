@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /* scrie forma de modify_one */
     $stmt = $parent->read_single();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
     $parent->numar = $row['numar'];
     $parent->filename = $row['filename'];
     $parent->nume = $row['nume'];

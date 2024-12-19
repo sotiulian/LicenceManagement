@@ -21,7 +21,7 @@
                         echo '<select id="keyid_child" name="keyid_child" class="form-control">';
                         echo '<option value="0" selected></option>'; // adding extra option with empty value to avoid setting the default value on the first record
                         while ($row_child = $stmt_child->fetch(PDO::FETCH_ASSOC)) {
-                               $selected = ($row_child['keyid']===$keyid_programe) ? 'selected' : '';
+                               $selected = ($row_child['keyid']==$keyid_programe) ? 'selected' : '';
                                echo '<option value="' . $row_child['keyid'] . '" ' . $selected . '>' . $row_child['nume'] . '</option>';
                               }
                         echo '</select>';                        

@@ -1,10 +1,10 @@
 <?php
 include '../config/db_connect.php';
 
-include '../src/Furnizor.php';
+include '../src/Client.php';
 include '../src/ClientiFurnizori.php';
 
-$parent = new Furnizor($conn);
+$parent = new Client($conn);
 $parentchilds = new ClientiFurnizori($conn);
 
 /* cand se vine din click pe linie de tabel de modificat sau din click pe forma de asociere*/
@@ -54,12 +54,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <div class="row">
         <div class="col-6">
-        <h2>Modify furnizor</h2>
+        <h2>Modify Client</h2>
         <form method="post" action="modify_handlerform.php">
             <input type="hidden" name="formname" value="modifyuserdata">
             <input type="hidden" id="keyid" name="keyid" value="<?php echo $parent->keyid; ?>">
             <div class="form-group">
-                <label for="nume">Nume:</label>
+                <label for="nume">Client name:</label>
                 <input type="text" class="form-control" id="nume" name="nume" value="<?php echo $parent->nume; ?>">
             </div>
             <button type="submit" name="delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>       
         </div>
         <div class="col-6">
-            <h2>Associate <?php echo $parent->nume; ?> with Clienti</h2>
+            <h2>Associate <?php echo $parent->nume; ?> with Furnizori</h2>
             <?php include 'read_all_child_content.php'; ?>
         </div>
         </div>
