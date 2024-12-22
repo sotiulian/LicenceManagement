@@ -27,6 +27,8 @@ class Client {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':parenttable', $this->table);
         $stmt->bindParam(':keyid', $this->keyid);
+        //echo $query; 
+        //print_r($stmt->debugDumpParams());   
         return $stmt->execute();
     }
 

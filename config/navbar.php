@@ -26,7 +26,10 @@
       </li> 
       <li class="nav-item">
         <a class="nav-link" href="module/clienti/public/index.php">Clienti</a>
-      </li>                              
+      </li>                      
+      <li class="nav-item">
+        <a class="nav-link" href="module/licence/public/index.php">Licence</a>
+      </li>       
     </ul>
   </div>
 </nav>

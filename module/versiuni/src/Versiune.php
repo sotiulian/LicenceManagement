@@ -38,7 +38,7 @@ class Versiune {
     }
 
     public function read() {
-        $query = 'SELECT keyid, numar, filename, keyid_programe, programe.nume FROM ' . $this->table
+        $query = 'SELECT ' . $this->table . '.keyid, numar, filename, keyid_programe, programe.nume FROM ' . $this->table
         . ' JOIN programe ON versiuni.keyid_programe = programe.keyid';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
