@@ -30,6 +30,9 @@
       <li class="nav-item">
         <a class="nav-link" href="module/licence/public/index.php">Licence</a>
       </li>       
+      <li class="nav-item">
+        <a class="nav-link" href="module/licencelog/public/index.php">Licence log</a>
+      </li>        
     </ul>
   </div>
 </nav>

@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col-2 d-flex flex-column justify-content-center">
-                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                <button type="submit" class="btn btn-primary mb-2">Filter</button>
                 <button type="button" class="btn btn-secondary mb-2" onclick="resetForm()">Reset</button>
             </div>
         </div> 
