@@ -1,6 +1,9 @@
 <?php
-
+session_start();
 include '../config/db_connect.php';
+include '../../../config/module_access.php';
+check_module_access($conn, 'users', $_SESSION['keyid_users']);
+
 include '../src/User.php';
 
 $user = new User($conn);

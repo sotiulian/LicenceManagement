@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="form-group">
-                <label for="timestampend">Date of Birth:</label>
+                <label for="timestampend">Timestamp end:</label>
                 <input type="datetime-local" class="form-control" id="timestampend" name="timestampend" value="<?php echo date('Y-m-d\TH:i', strtotime($user->timestampend)); ?>">
             </div>
             <button type="submit" name="delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>

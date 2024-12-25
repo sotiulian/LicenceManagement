@@ -51,6 +51,22 @@ class Modul {
         return $stmt;
     }
 
+    public function is_accessible_by_keyid_users($keyid_users) {
+        $query = 'SELECT true as accesible '
+        . ' FROM ' . $this->table 
+        . ' JOIN modules_groups ON modules_groups.keyid_modules = ' . $this->table . '.keyid '
+        . ' JOIN groups ON groups.keyid = modules_groups.keyid_groups '
+        . ' JOIN users_groups ON users_groups.keyid_groups = groups.keyid '     
+        . ' WHERE ' . $this->table . '.modul = :modul AND '
+        .        ' users_groups.keyid_users = :keyid_users '
+        . ' LIMIT 1';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':modul', $this->modul);
+        $stmt->bindParam(':keyid_users', $keyid_users);
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function update() {
         $query = 'UPDATE ' . $this->table . ' SET nume = :nume, modul = :modul, issys = :issys WHERE keyid = :keyid';
         $stmt = $this->conn->prepare($query);

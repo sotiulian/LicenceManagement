@@ -1,6 +1,11 @@
 <?php
-
+session_start();
 include '../config/db_connect.php';
+
+// verifica daca modulul este accesibil de catre userul logat
+include '../../../config/module_access.php';
+check_module_access($conn, 'furnizori', $_SESSION['keyid_users']);
+
 include '../src/Furnizor.php';
 
 $tableobject = new Furnizor($conn);

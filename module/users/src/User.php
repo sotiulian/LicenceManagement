@@ -50,6 +50,7 @@ class User {
         return $stmt;
     }
 
+
     public function update() {
         $query = 'UPDATE ' . $this->table . ' SET username = :username, password = :password, timestampend = :timestampend WHERE keyid = :keyid';
         $stmt = $this->conn->prepare($query);
@@ -80,7 +81,7 @@ class User {
     }
 
     public function filter_users($username, $timestampend_start, $timestampend_end, $start, $limit) {
-        $query = 'SELECT keyid, username, timestampend FROM ' 
+        $query = 'SELECT keyid, username, password, timestampend FROM ' 
                 . $this->table 
                 . ' WHERE username LIKE :username AND timestampend BETWEEN :timestampend_start AND :timestampend_end LIMIT :start, :limit';
         $stmt = $this->conn->prepare($query);

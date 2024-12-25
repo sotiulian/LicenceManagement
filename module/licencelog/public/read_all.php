@@ -1,6 +1,11 @@
 <?php
-
+session_start();
 include '../config/db_connect.php';
+
+// verifica daca modulul este accesibil de catre userul logat
+include '../../../config/module_access.php';
+check_module_access($conn, 'licencelog', $_SESSION['keyid_users']);
+
 include '../src/Licence_log.php';
 include '../../clienti/src/Client.php'; // pentru a putea afisa lista cu numele clientilor in dropdown
 include '../../versiuni/src/Versiune.php'; // pentru a putea afisa lista cu numarul versiunilor in dropdown

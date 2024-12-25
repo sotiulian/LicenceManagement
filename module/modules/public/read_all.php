@@ -1,6 +1,11 @@
 <?php
-
+session_start();
 include '../config/db_connect.php';
+
+// verifica daca modulul este accesibil de catre userul logat
+include '../../../config/module_access.php';
+check_module_access($conn, 'modules', $_SESSION['keyid_users']);
+
 include '../src/Modul.php';
 
 $module = new Modul($conn);
